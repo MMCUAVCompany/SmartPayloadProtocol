@@ -23,7 +23,7 @@ There is a standard payload connector using in MMC professional drone platform
 which provides Power, CAN, NET, HDMI port and more. Design your payloads with
 MMCPayloadConnector to bring your idea to the sky.
 
-# How it works?
-![logo](./resources/a.png)
+# How does it works?
+![logo](./resources/frame.png)
 
 # How to start?
