@@ -15,10 +15,16 @@ Attitude and more.
 
 2. Using MMC GCS/MCS to communicate with your payloads.  
 MMC GCS(ground control station)/MCS(mobile control station) can receive the 
-video and data from your payload in real time and send commands or parameters 
+video and data from your payloads in real time and send commands or parameters 
 to contorl and setting your payloads.  
 
-3. Using MMC payload interface.
+3. Design any payloads you want.  
 There is a standard payload interface using in MMC professional drone platform 
-which provides Power, CAN, NET, HDMI port and more.
+which provides Power, CAN, NET, HDMI port and more. Design your payloads with
+MMC Payload Interface to bring your idear to the sky.
 
+# How it works?
+
+
+
+# How to start?
