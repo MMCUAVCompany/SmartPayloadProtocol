@@ -26,4 +26,6 @@ MMCPayloadConnector to bring your idea to the sky.
 # How does it works?
 ![logo](./resources/frame.png)
 
-# How to start?
+# Quick Start
+1. Read the introduction of [MMCPayloadConnector](./hardware/hardware.md).
+

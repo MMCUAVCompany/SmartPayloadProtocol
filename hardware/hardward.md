@@ -1,2 +1,0 @@
-# MMC Payload Interface Hardware
-
