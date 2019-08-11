@@ -3,10 +3,10 @@
 MMCPayloadConnector is used for mount payloads to MMC drone  platforms.
 The MMCPayloadConnector consists of two parts.  
 
-**MMCPayloadConnector-Drone**
+**MMCPayloadConnector-Drone**  
 The MMCPayloadConnector-Drone part is Installed on every MMC drone platforms:
 ![connector-drone](../resources/connector-drone.png)
-**MMCPayloadConnector-Payload**
+**MMCPayloadConnector-Payload**  
 The MMCPayloadConnector-Payload part is used in every payloads whitch can 
 mount to MMC drone platforms.
 ![connector-payload](../resources/connector-payload.png)
@@ -27,6 +27,7 @@ Payload system is working:
 
 # Pins
 ![pins](../resources/pins.png)
+
 |Pins|Definition|Desc.|
 |---|---|---|
 |PIN1|||
@@ -67,6 +68,7 @@ Payload system is working:
 |PIN38|||
 |PIN39|||
 |PIN40|||
+
 # Develop kit
 
 
