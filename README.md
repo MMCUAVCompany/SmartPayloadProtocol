@@ -2,7 +2,7 @@
 # SmartPayloadProtocol
 *Every payload can mount to the MMC flight platform！*  
 
-# ABOUT
+# About
 Using MMC SmartPayloadProtocol, you can intergrate any payload devices 
 including camera, sensors, speaker, gimbal and more to MMC professional 
 drone platforms. 
@@ -19,13 +19,21 @@ video and data from your payloads in real time and send commands or parameters
 to contorl and setting your payloads.  
 
 3. Design any payloads you want.  
-There is a standard payload connector using in MMC professional drone platform 
-which provides Power, CAN, NET, HDMI port and more. Design your payloads with
-MMCPayloadConnector to bring your idea to the sky.
+There is a Standardized Payload Connector System using in MMC professional 
+drone platform which provides Power, CAN, NET, HDMI port and more. Design your 
+payloads with MMCPayloadConnector to bring your idea to the sky.
 
 # How does it works?
-![logo](./resources/frame.png)
+![frame](./resources/frame.png)
 
-# Quick Start
-1. Read the introduction of [MMCPayloadConnector](./hardware/hardware.md).
+# Payloads software environment requirement
+Any embedded systems that support CAN communications.
+
+# Before development
+1. Introduction of [MMCPayloadConnector](./hardware/hardware.md).  
+2. 
+
+
+# Quick start
+
 
