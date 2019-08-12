@@ -6,16 +6,20 @@ The MMCPayloadConnector consists of two parts.
 **MMCPayloadConnector-Drone**  
 The MMCPayloadConnector-Drone part is Installed on every MMC drone platforms:
 ![connector-drone](../resources/connector-drone.png)  
+
 **MMCPayloadConnector-Payload**  
 The MMCPayloadConnector-Payload part is used in every payloads whitch can 
-mount to MMC drone platforms.This document mainly introduces MMCPayloadConnector-Payload.
+mount to MMC drone platforms.This document mainly introduces 
+MMCPayloadConnector-Payload.  
+
+**Maximum weight of Payloads must be less than 3kg**  
 ![connector-payload](../resources/connector-payload.png)
 
 These two parts are electrically connected by Pogo-Pin when the Dorne and 
 Payload system is working:
 ![working](../resources/connector-working.png)
 
-#Pogo-Pin
+# Pogo-Pin
 ![pogopins](../resources/pogopins-1.png)
 **Features**
 
@@ -23,7 +27,13 @@ Payload system is working:
 |---|---|
 |Current|3A/pin|
 |Resistance|50mΩ MAX|
+|Resilience|70g±20g/pin|
 
+# Development kit
+You can get a development kit from [MMC]((http://www.mmcuav.com/)) 
+which contains the following components：  
+* MMCPayloadConnector-Payload  
+* Development Board  
 
 # Interfaces
 
@@ -78,10 +88,12 @@ Payload system is working:
 |PIN37|NC1|TTL(3.3v) UART GND|
 |PIN38-PIN40|GND|POWER GND|
 
-# Develop kit
-
-
 # Dimensions
+
+MMCPayloadConnector-Drone
+![working](../resources/connector-drone-deminsion.png)
+
+MMCPayloadConnector-Payload
 ![working](../resources/dimensions.png)
 ![working](../resources/dimensions-2.png)
 
