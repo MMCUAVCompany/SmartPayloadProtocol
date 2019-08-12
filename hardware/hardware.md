@@ -11,9 +11,13 @@ The MMCPayloadConnector-Drone part is Installed on every MMC drone platforms:
 The MMCPayloadConnector-Payload part is used in every payloads whitch can 
 mount to MMC drone platforms.This document mainly introduces 
 MMCPayloadConnector-Payload.  
+![connector-payload](../resources/connector-payload.png)  
+**Features**
 
-**Maximum weight of Payloads must be less than 3kg**  
-![connector-payload](../resources/connector-payload.png)
+|Item|Desc.|
+|---|---|
+|weight|≈83g|
+|Maximum weight of Payloads|3 kg|
 
 These two parts are electrically connected by Pogo-Pin when the Dorne and 
 Payload system is working:
@@ -29,17 +33,11 @@ Payload system is working:
 |Resistance|50mΩ MAX|
 |Resilience|70g±20g/pin|
 
-# Development kit
-You can get a development kit from [MMC]((http://www.mmcuav.com/)) 
-which contains the following components：  
-* MMCPayloadConnector-Payload  
-* Development Board  
-
-# Interfaces
+# MMCPayloadConnector interfaces
 
 |Interface|Signal|Note|
 |---|---|---|
-|POWER|POWER+,GND|50V 3A|
+|POWER|POWER+,GND|24~50V 3A|
 |CAN|CANH,CANL|2.0 A and 2.0 B Active |
 |HDMI|DATA2+,DATA2-,DATA1+,DATA1-,DATA0+,DATA0-,CLOCK+,CLOCK-,CEC,HDMI_GND,HDMI_5V,HGN|Full HD supported|
 |NET|TX-,TX+,RX+,RX-|network|
@@ -83,10 +81,39 @@ which contains the following components：
 |PIN32|TX+|backup of PIN9|
 |PIN33|CAN1_H|backup of PIN8|
 |PIN34|CAN1_L|backup of PIN7|
-|PIN35|NC3|TTL(3.3v) UART RX|
-|PIN36|NC2|TTL(3.3v) UART TX|
-|PIN37|NC1|TTL(3.3v) UART GND|
+|PIN35|NC3|UART RX|
+|PIN36|NC2|UART TX|
+|PIN37|NC1|UART GND|
 |PIN38-PIN40|GND|POWER GND|
+
+# MMC Development kit
+You can get a development kit from [MMC]((http://www.mmcuav.com/)) to have a quick development.
+The development kit contains the following components：  
+
+* MMCPayloadConnector-Payload  
+The MMCPayloadConnector-Payload helps you designe your own payloads which compatible with MMC 
+drone platform quickly.
+![Connector-Payload](../resources/pogopin-2.jpeg)  
+* Development board  
+The development board can run MMC demo program which helps you quickly familiarize the 
+software protocol during the R&D phase.The MCU on development board is STM32F405RGT6. 
+Socket used on the development board is [JST-GH](../resources/JST-GH-SOCKET.pdf) and HDMI
+interface on the development board is [usls-20](../resources/usls-20.pdf).  
+![top](../resources/Top.png)  
+![bottom](../resources/Buttom.png)  
+
+*Development board interface info*
+
+|No.|Name|Desc.|
+|---|---|---|
+|J1|Main Power|the power from drone, 24~50V 150w max|
+|J2|UART|Uart from drone, connect to MMCPayloadConnector PIN35-PIN37|
+|J3|NET|network port|
+|J4|PWM|pwm singnal from MCU on development board|
+|J5|Power and CAN2 bus|12v power and CAN2 connects MCU on development board and your payloads|
+|J6|Power and UART3|12v power and UART from MCU on development board|
+|J7|CAN|CAN BUS connects MMC drone platform and MCU on development board|
+|J8|UART1|UART from MCU on development board |
 
 # Dimensions
 
@@ -99,3 +126,4 @@ MMCPayloadConnector-Payload
 
 
 
+file:///home/fu/Documents/SmartPayloadProtocol/resources/MMCPayloadConnector.png
