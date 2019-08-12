@@ -24,8 +24,9 @@ Payload system is working:
 ![working](../resources/connector-working.png)
 
 # Pogo-Pin
-![pogopins](../resources/pogopins-1.png)
-**Features**
+![pogopins](../resources/pogopins-1.png)  
+
+*Features*
 
 |Item|Desc.|
 |---|---|
