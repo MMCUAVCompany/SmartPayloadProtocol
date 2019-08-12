@@ -31,10 +31,11 @@ Any embedded systems that support CAN communications.
 
 # Before development
 1. Introduction of [MMCPayloadConnector](./hardware/hardware.md).  
-2. 
+2. [Software Protocol](./protocol/protocol.md)
 
 
 # Quick start
+
 
 
 

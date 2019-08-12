@@ -88,13 +88,14 @@ Payload system is working:
 |PIN38-PIN40|GND|POWER GND|
 
 # MMC Development kit
-You can get a development kit from [MMC]((http://www.mmcuav.com/)) to have a quick development.
+You can get a development kit from [MMC](http://www.mmcuav.com/) to have a quick development.
 The development kit contains the following components：  
 
 * MMCPayloadConnector-Payload  
 The MMCPayloadConnector-Payload helps you designe your own payloads which compatible with MMC 
-drone platform quickly.
+drone platform quickly.  
 ![Connector-Payload](../resources/pogopin-2.jpeg)  
+
 * Development board  
 The development board can run MMC demo program which helps you quickly familiarize the 
 software protocol during the R&D phase.The MCU on development board is STM32F405RGT6. 
