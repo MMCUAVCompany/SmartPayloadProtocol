@@ -12,7 +12,7 @@ The MMCPayloadConnector-Payload part is used in every payloads whitch can
 mount to MMC drone platforms.This document mainly introduces 
 MMCPayloadConnector-Payload.  
 ![connector-payload](../resources/connector-payload.png)  
-**Features**
+*Features*
 
 |Item|Desc.|
 |---|---|
@@ -123,7 +123,3 @@ MMCPayloadConnector-Drone
 MMCPayloadConnector-Payload
 ![working](../resources/dimensions.png)
 ![working](../resources/dimensions-2.png)
-
-
-
-file:///home/fu/Documents/SmartPayloadProtocol/resources/MMCPayloadConnector.png
