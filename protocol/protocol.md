@@ -17,7 +17,7 @@ interactive interface web pages and MMC drone platform.
 Payloads can transmit data to the control station(GCS/MCS) and via the flight platform 
 use CAN bus in MMCPayloadConnector.
 ## Physical Layer
-CAN bus with standard ID and 1 Mbps baudrate in MMCPayloadConnector.  
+CAN bus with standard identifier and 1 Mbps baudrate in MMCPayloadConnector.  
 **UPLOAD ID**  
 Payloads sent data to MMC flight platform using CAN message which identifier 
 ID length is 11 bits. That message ID called `UPLOAD ID`, the user can customize 
@@ -32,7 +32,7 @@ Data transmission between payloads and MMC drone platform is based on data frame
 as the units. The maximum length of a data frames is 255+4 bytes. Since a CAN message 
 has only 8 bytes at most, a frame of data contains several CAN message.  
 
-**Frame format**  
+**Frame Format**  
 
 |FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
 |------------------|---------------|-------------------|-------|------|
@@ -50,15 +50,16 @@ has only 8 bytes at most, a frame of data contains several CAN message.
 *note*  
 - FRAME HEAD must be ***0xA5***.  
 - DATA LENGTH must be greater than 1 and less than 255.    
-- CRC validation begins with the FRAME TYPE field and ends with PAYLOAD DATA field, 
+- CRC validation begins with the `FRAME TYPE` field and ends with `PAYLOAD DATA` field, 
 that is, from byte 1 to byte n+2 of the data frame. [The CRC algorithm](#crc_table).
 
+**example**
+A Data Frame which contains 3 CAN message packets.
+![data_frame](../resources/data_frame_example.png)
 
 
 
-
-
-# CRC algorithm <a name="crc_table"></a>
+# CRC Algorithm <a name="crc_table"></a>
 ```
 static const unsigned char crc_table[] =
 { 
@@ -87,11 +88,11 @@ static const unsigned char crc_table[] =
   */
 unsigned char cal_crc_table(unsigned char *ptr, unsigned char len) 
 {
-unsigned char  crc = 0x00;
+	unsigned char  crc = 0x00;
     	while (len--)
     	{
         	crc = crc_table[crc ^ *ptr++];
     	}
-	return (crc);
+	return crc;
 }
 ```
