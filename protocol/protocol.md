@@ -32,6 +32,19 @@ Data transmission between payloads and MMC drone platform is based on data frame
 as the units. The maximum length of a data frames is 255+4 bytes. Since a CAN message 
 has only 8 bytes at most, a frame of data contains several CAN message.  
 
-**Frame structure**  
+**Frame format**  
+
+|FRAME HEAD|FRAME TYPE|DATA LENGTH|DATA|CRC|
+|------------------|---------------|-------------------|-------|------|
+
+*Serialization*
+
+*note*  
+- FRAME HEAD: Must be ==0xA5==, It means the beginning of a data frame.  
+- FRAME TYPE: The type of data frame. Usage will be mentioned below.  
+- DATA LENGTH:The length of payload data, must be greater than 1 and less than 255.  
+- DATA: payload data.  
+- CRC: CRC check result.  
+
 
 
