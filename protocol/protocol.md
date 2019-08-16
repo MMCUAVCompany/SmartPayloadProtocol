@@ -1,17 +1,33 @@
 # ![protocol](../resources/protocol.png)
+# About
 The purpose of the MMC Payload Control Protocol is to allow users to control 
-their payloads by graphical interactive interface which designed by themselves in
-MMC drone platforms. Graphical interactive interface is a web page that written in 
+their payloads by graphical interactive interface which designed by themselves through 
+MMC drone platforms. Graphical Interactive Interface is a web page that written in 
 HTML and JavaScript language and MMC GSC/MCS loads it on system start. This protocol 
 is used for data transmission between payloads and ground stations, Graphical 
-interactive interface web pages and MMC drone platform.
+interactive interface web page and MMC drone platform.
 
-*Features* 
+*Features*  
+* Custom Graphical Interactive Interface
+* Data Transmission
+* Video Transmission
+* Get MMC drone platform state data
 
-* data transmission
-* video transmission
-* Custom graphical interactive interface
-* MMC drone platform state data
+# Graphical Interactive Interface
+Graphical Interactive Interface is used for payload control and status monitoring, It's a web 
+page written in HTML and JavaScript language.There is a WebSocket server running in MMC 
+GCS/MCS and its IP address is <u>127.0.0.1:6666</u>.  
+Custom Graphical Interactive Interface consists of two main files:  
+* An HTML file describing the interface.  
+* A PNG image file of Payload with a resolution of 200*200.  
+These two files must use the same file name and put them in the 
+<u>[MMC GCS/MCS software installation path]\payloads</u> folder.  
+
+[Payload Identification Procedure](#payload_identification) is performed at MMC GCS/MCS 
+system startup. Once the payload is successfully identified, the payload image will be 
+displayed on the top right of the software.  
+![data_frame](../resources/gcs.jpeg)  
+
 
 # Data Transmission
 Payloads can transmit data to the control station(GCS/MCS) and via the flight platform 
@@ -30,7 +46,8 @@ The ID is equal to `UPLOAD ID`&0x3FF, that is, the ID range is 0x000-0x3FF.
 ## Transport Layer
 Data transmission between payloads and MMC drone platform is based on data frames 
 as the units. The maximum length of a data frames is 255+4 bytes. Since a CAN message 
-has only 8 bytes at most, a frame of data contains several CAN message.  
+has only 8 bytes at most, a frame of data contains several CAN message.The Data structure 
+of MMC drone platform and GCS/MCS  is little endian.  
 
 **Frame Format**  
 
@@ -47,17 +64,17 @@ has only 8 bytes at most, a frame of data contains several CAN message.
 | 3 to (n+2) | uint8_t payload[n] |n Byte(1<=n<=255) | payload data | | |
 |n+3| uint8_t crc| 1 Byte | CRC check | 0-255 |CRC check result of data frame | 
 
-*note*  
+*Note*  
 - FRAME HEAD must be ***0xA5***.  
 - DATA LENGTH must be greater than 1 and less than 255.    
 - CRC validation begins with the `FRAME TYPE` field and ends with `PAYLOAD DATA` field, 
 that is, from byte 1 to byte n+2 of the data frame. [The CRC algorithm](#crc_table).
 
-**example**
+*Example*  
 A Data Frame which contains 3 CAN message packets.
 ![data_frame](../resources/data_frame_example.png)
 
-
+# Payload Identification Procedure <a name="payload_identification"></a>
 
 # CRC Algorithm <a name="crc_table"></a>
 ```
@@ -80,6 +97,7 @@ static const unsigned char crc_table[] =
 	0xc1,0xf0,0xa3,0x92,0x05,0x34,0x67,0x56,0x78,0x49,0x1a,0x2b,0xbc,0x8d,0xde,0xef,
 	0x82,0xb3,0xe0,0xd1,0x46,0x77,0x24,0x15,0x3b,0x0a,0x59,0x68,0xff,0xce,0x9d,0xac
 };
+
 /**
   * @brief  caculate a CRC8 check value for an array of data.  
   * @param  ptr: a pointer whitch point to the address of data.
