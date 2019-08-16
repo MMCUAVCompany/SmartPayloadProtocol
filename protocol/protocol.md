@@ -16,12 +16,12 @@ interactive interface web page and MMC drone platform.
 # Graphical Interactive Interface
 Graphical Interactive Interface is used for payload control and status monitoring, It's a web 
 page written in HTML and JavaScript language.There is a WebSocket server running in MMC 
-GCS/MCS and its IP address is <u>127.0.0.1:6666</u>.  
+GCS/MCS and its IP address is ``127.0.0.1:6666``.  
 Custom Graphical Interactive Interface consists of two main files:  
 * An HTML file describing the interface.  
 * A PNG image file of Payload with a resolution of 200*200.  
 These two files must use the same file name and put them in the 
-<u>[MMC GCS/MCS software installation path]\payloads</u> folder.  
+``[MMC GCS/MCS software installation path]\payloads`` folder.  
 
 [Payload Identification Procedure](#payload_identification) is performed at MMC GCS/MCS 
 system startup. Once the payload is successfully identified, the payload image will be 
