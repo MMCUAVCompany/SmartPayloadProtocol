@@ -85,24 +85,11 @@ A Data Frame which contains 3 CAN message packets.
 
 ### Payload Identification Procedure <a name="payload_identification"></a>
 
-```mermaid
-sequenceDiagram
-participant 张 as 张三
-participant 李 as 李四
-participant 王 as  王五   
-张 ->> +李: 你好！李四, 最近怎么样?
-李-->> 王: 你最近怎么样，王五？
-李--x -张: 我很好，谢谢!
-activate 王
-李-x 王: 我很好，谢谢!   
-Note over 李,王: 李四想了很长时间, 文字太长了<br/>不适合放在一行.
-deactivate 王
-loop 李四再想想
-李-->>王: 我还要想想
-王-->>李: 想想吧
-end
-李-->>张: 打量着王五...
-张->>王: 很好... 王五, 你怎么样?
+```sequence
+Title:连接建立的过程
+客户主机->服务器主机: 连接请求（SYN=1,seq=client_isn） 
+服务器主机->客户主机: 授予连接（SYN=1,seq=client_isn）\n ack=client_isn+1
+客户主机->服务器主机: 确认（SYN=0,seq=client_isn+1）\nack=server_isn+1
 ```
 
 
