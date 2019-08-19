@@ -100,6 +100,7 @@ access to the MMC cloud platform `MSpace`.
 * REQUEST  
 Payload send `REQUEST` data frame at a frequency of 1 Hz to inform the control 
 station that there is a new payload.The frame details are shown in the figure below:  
+
 |FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
 |------------------|---------------|-------------------|-------|------|
 |0xA5|0xFD|3|0x00|crc|
@@ -108,6 +109,7 @@ station that there is a new payload.The frame details are shown in the figure be
 GCS/MCS send `IDENTIFICATION` data frame at a frequency of 1 Hz to inform Payloads 
 send unique ID when GCS/MCS received the `REQUEST` data frame.The frame details 
 are shown in the figure below:  
+
 |FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
 |------------------|---------------|-------------------|-------|------|
 |0xA5|0xFF|3|0x01|crc|
@@ -116,19 +118,22 @@ are shown in the figure below:
 Payload stop the `REQUEST` data frame and send `ID` data frame  whenever 
 a `IDENTIFICATION` data frame is received.The `ID` data frame details are shown 
 in the figure below:  
+
 |FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
 |------------------|---------------|-------------------|-------|------|
 |0xA5|0xFE|14|uint16_t vender_ID<br/>uint16_t payload_type</br>uint32_t UID</br>uint32_t version|crc|
+
 > vender_ID: unique vender ID, Please confirm with MMC before using this ID.  
 > payload_type:the payload type define by user.  
 > UID: unique payload ID, usually use the CPU id of payload.  
-> version:payload software version.  
+> version:payload software version.
 
 * GET_PAGE  
 GCS/MCS send `GET_PAGE` data frame at a frequency of 1 Hz to get 
 *Graphical Interactive Interface* file name when GCS/MCS received 
 the `ID` data frame. `FRAME TYPE` of this data frame is the same as 
 `IDENTIFICATION` data frame.The frame details are shown in the figure below:  
+
 |FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
 |------------------|---------------|-------------------|-------|------|
 |0xA5|0xFF|3|0x02|crc|
@@ -136,9 +141,14 @@ the `ID` data frame. `FRAME TYPE` of this data frame is the same as
 * PAGE_INFO  
 Payload send `PAGE_INFO` data frame  whenever a `GET_PAGE` data frame 
 is received.The data frame details are shown in the figure below:  
+
 |FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
 |------------------|---------------|-------------------|-------|------|
 |0xA5|0xFC|n+6|uint16_t width<br/>uint16_t height</br>uint8_t filename[n]|crc|
+
+> width:width of Graphical Interactive Interface.(Unit:pixel).
+> height:height of Graphical Interactive Interface.(Unit:pixel).
+> filename:filename of Graphical Interactive Interface page without file extension.
 
 # CRC Algorithm <a name="crc_table"></a>
 ```
