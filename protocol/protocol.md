@@ -3,7 +3,7 @@
 The purpose of the MMC Payload Control Protocol is to allow users to control 
 their payloads by graphical interactive interface which designed by themselves through 
 MMC drone platforms. Graphical Interactive Interface is a web page that written in 
-HTML and JavaScript language and MMC GSC/MCS loads it on system start. This protocol 
+HTML and JavaScript language and MMC GSC/MCS loads it on system working. This protocol 
 is used for data transmission between payloads and ground stations, Graphical 
 interactive interface web page and MMC drone platform.
 
@@ -18,11 +18,11 @@ Graphical Interactive Interface is used for payload control and status monitorin
 page written in HTML and JavaScript language.There is a WebSocket server running in MMC 
 GCS/MCS and its IP address is `127.0.0.1:6666`. The Graphical Interactive Interface web page 
 should actively connect to the WebSocket server when it be loaded by GCS/MCS to transmit 
-data with payloads.
+data with payloads.  
 Custom Graphical Interactive Interface consists of two main files:  
 
-* An HTML file describing the interface.  
-* A PNG image file of Payload with a resolution of 200*200.  
+- An HTML file describing the interface.  
+- A PNG image file of Payload with a resolution of 200*200.  
 
 These two files must use the same file name and put them in the 
 `[MMC GCS/MCS software installation path]\payloads` folder.  
@@ -31,13 +31,17 @@ These two files must use the same file name and put them in the
 system startup. Once the payload is successfully identified, the payload image will be 
 displayed on the top right of the software.  
 ![data_frame](../resources/gcs.jpeg)  
+If the payload image is clicked by users, GCS/MCS will load the HTML web page.
+![CGII](../resources/CGII.jpeg)  
 
 
 # Data Transmission
 Payloads can transmit data to the control station(GCS/MCS) and via the flight platform 
-use CAN bus in MMCPayloadConnector.
+use CAN bus in MMCPayloadConnector.  
 ## Physical Layer
-CAN bus with standard identifier and 1 Mbps baudrate in MMCPayloadConnector.  
+Data transfer based on MMCPayloadConnector hardware.
+## Link Layer
+CAN bus with standard identifier and 1 Mbps baudrate.  
 **UPLOAD ID**  
 Payloads sent data to MMC flight platform using CAN message which identifier 
 ID length is 11 bits. That message ID called `UPLOAD ID`, the user can customize 
@@ -49,7 +53,7 @@ The ID is equal to `UPLOAD ID`&0x3FF, that is, the ID range is 0x000-0x3FF.
 
 ## Transport Layer
 Data transmission between payloads and MMC drone platform is based on data frames 
-as the units. The maximum length of a data frames is 255+4 bytes. Since a CAN message 
+as the units. The maximum length of a data frames is 255+2 bytes. Since a CAN message 
 has only 8 bytes at most, a frame of data contains several CAN message.The Data structure 
 of MMC drone platform and GCS/MCS  is little endian.  
 
@@ -64,21 +68,26 @@ of MMC drone platform and GCS/MCS  is little endian.
 |---------------|-------------|---------|-------|--------|-----------------|
 | 0 | uint8_t head | 1 Byte | head of data frame | 0xA5 | Indicates the beginning of a new data frame|
 | 1 | uint8_t type | 1 Byte | type of data frame | 0-255| Usage will be mentioned below|
-| 2 | uint8_t len | 1 Byte | Length of payload data | 1-255| Indicates the length of the following payload data field|
-| 3 to (n+2) | uint8_t payload[n] |n Byte(1<=n<=255) | payload data | | |
+| 2 | uint8_t len | 1 Byte | Length of data frame | 3-255| Indicates the length of the frame except FRAME HEAD and CRC filed|
+| 3 to (n+2) | uint8_t payload[n] |n Byte(1<=n<=253) | payload data | | |
 |n+3| uint8_t crc| 1 Byte | CRC check | 0-255 |CRC check result of data frame | 
 
 *Note*  
 - FRAME HEAD must be ***0xA5***.  
-- DATA LENGTH must be greater than 1 and less than 255.    
+- DATA LENGTH must be greater than 3 and less than 255.    
 - CRC validation begins with the `FRAME TYPE` field and ends with `PAYLOAD DATA` field, 
-that is, from byte 1 to byte n+2 of the data frame. [The CRC algorithm](#crc_table).
+that is, from byte 1 to byte n+2 of the data frame. [The CRC algorithm](#crc_table).  
+- The maximum length of PAYLOAD DATA is 253 bytes.  
 
 *Example*  
 A Data Frame which contains 3 CAN message packets.
 ![data_frame](../resources/data_frame_example.png)
 
-# Payload Identification Procedure <a name="payload_identification"></a>
+## Application Layer
+
+### Payload Identification Procedure <a name="payload_identification"></a>
+
+
 
 # CRC Algorithm <a name="crc_table"></a>
 ```
