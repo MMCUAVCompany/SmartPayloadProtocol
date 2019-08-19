@@ -28,7 +28,7 @@ These two files must use the same file name and put them in the
 `[MMC GCS/MCS software installation path]\payloads` folder.  
 
 [Payload Identification Procedure](#payload_identification) is performed at MMC GCS/MCS 
-system startup. Once the payload is successfully identified, the payload image will be 
+and Payloads startup. Once the payload is successfully identified, the payload image will be 
 displayed on the top right of the software.  
 ![data_frame](../resources/gcs.jpeg)  
 If the payload image is clicked by users, GCS/MCS will load the HTML web page.
@@ -84,13 +84,13 @@ A Data Frame which contains 3 CAN message packets.
 ## Application Layer
 
 ### Payload Identification Procedure <a name="payload_identification"></a>
-
-```sequence
-Title:连接建立的过程
-客户主机->服务器主机: 连接请求（SYN=1,seq=client_isn） 
-服务器主机->客户主机: 授予连接（SYN=1,seq=client_isn）\n ack=client_isn+1
-客户主机->服务器主机: 确认（SYN=0,seq=client_isn+1）\nack=server_isn+1
-```
+Payload Identification Procedure is performed at MMC GCS/MCS and Payloads startup.
+The details are shown in the SequenceDiagram below.The control station(GCS/MCS) 
+obtains the Payload ID and the *Graphical Interactive Interface* file information 
+during the procedure, so that *Graphical Interactive Interface* can be correctly 
+loaded after the procedure ends. The Payloads should provide a unique ID for 
+access to the MMC cloud platform `MSpace`.
+![identify](../resources/identify.jpg)
 
 
 # CRC Algorithm <a name="crc_table"></a>
