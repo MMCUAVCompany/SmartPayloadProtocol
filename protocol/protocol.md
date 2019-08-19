@@ -115,17 +115,36 @@ are shown in the figure below:
 |0xA5|0xFF|3|0x01|crc|
 
 * ID  
-Payload stop the `REQUEST` data frame and send `ID` data frame  Whenever 
-a `IDENTIFICATION` data frame is received.The frame details are shown in 
-the figure below:  
+Payload stop the `REQUEST` data frame and send `ID` data frame  whenever 
+a `IDENTIFICATION` data frame is received.The `ID` data frame details are shown 
+in the figure below:  
 
 |FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
 |------------------|---------------|-------------------|-------|------|
-|0xA5|0xFE|14|uint16_t Vender_ID<br/>uint16_t type</br>uint32_t UID</br>uint32_t version|crc|
+|0xA5|0xFE|14|uint16_t vender_ID<br/>uint16_t payload_type</br>uint32_t UID</br>uint32_t version|crc|
+
+> vender_ID: unique vender ID, Please confirm with MMC before using this ID.  
+> payload_type:the payload type define by user.  
+> UID: unique payload ID, usually use the CPU id of payload.  
+> version:payload software version.  
 
 * GET_PAGE  
-* PAGE_INFO  
+GCS/MCS send `GET_PAGE` data frame at a frequency of 1 Hz to get 
+*Graphical Interactive Interface* file name when GCS/MCS received 
+the `ID` data frame. `FRAME TYPE` of this data frame is the same as 
+`IDENTIFICATION` data frame.The frame details are shown in the figure below:  
 
+|FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
+|------------------|---------------|-------------------|-------|------|
+|0xA5|0xFF|3|0x02|crc|
+
+* PAGE_INFO  
+Payload send `PAGE_INFO` data frame  whenever a `GET_PAGE` data frame 
+is received.The data frame details are shown in the figure below:  
+
+|FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
+|------------------|---------------|-------------------|-------|------|
+|0xA5|0xFC|n+6|uint16_t width<br/>uint16_t height</br>uint8_t filename[n]|crc|
 
 # CRC Algorithm <a name="crc_table"></a>
 ```
