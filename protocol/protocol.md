@@ -77,9 +77,13 @@ of MMC drone platform and GCS/MCS  is little endian.
 that is, from byte 1 to byte n+2 of the data frame. [The CRC algorithm](#crc_table).  
 - The maximum length of PAYLOAD DATA is 253 bytes.  
 
+![data_frame](../resources/important1.jpg)***`PAYLOAD DATA` field must be 1-byte aligned and little-endian***
+
 *Example*  
 A Data Frame which contains 3 CAN message packets.
 ![data_frame](../resources/data_frame_example.png)
+
+
 
 ## Application Layer
 
@@ -89,8 +93,38 @@ The details are shown in the SequenceDiagram below.The control station(GCS/MCS)
 obtains the Payload ID and the *Graphical Interactive Interface* file information 
 during the procedure, so that *Graphical Interactive Interface* can be correctly 
 loaded after the procedure ends. The Payloads should provide a unique ID for 
-access to the MMC cloud platform `MSpace`.
-![identify](../resources/identify.jpg)
+access to the MMC cloud platform `MSpace`.  
+![identify](../resources/identify.jpg)  
+*Data Frames*
+
+* REQUEST  
+Payload send `REQUEST` data frame at a frequency of 1 Hz to inform the control 
+station that there is a new payload.The frame details are shown in the figure below:  
+
+|FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
+|------------------|---------------|-------------------|-------|------|
+|0xA5|0xFD|3|0x00|crc|
+
+* IDENTIFICATION  
+GCS/MCS send `IDENTIFICATION` data frame at a frequency of 1 Hz to inform Payloads 
+send unique ID when GCS/MCS received the `REQUEST` data frame.The frame details 
+are shown in the figure below:  
+
+|FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
+|------------------|---------------|-------------------|-------|------|
+|0xA5|0xFF|3|0x01|crc|
+
+* ID  
+Payload stop the `REQUEST` data frame and send `ID` data frame  Whenever 
+a `IDENTIFICATION` data frame is received.The frame details are shown in 
+the figure below:  
+
+|FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
+|------------------|---------------|-------------------|-------|------|
+|0xA5|0xFE|14|uint16_t Vender_ID<br/>uint16_t type</br>uint32_t UID</br>uint32_t version|crc|
+
+* GET_PAGE  
+* PAGE_INFO  
 
 
 # CRC Algorithm <a name="crc_table"></a>
