@@ -146,9 +146,110 @@ is received.The data frame details are shown in the figure below:
 |------------------|---------------|-------------------|-------|------|
 |0xA5|0xFC|n+6|uint16_t width<br/>uint16_t height</br>uint8_t filename[n]|crc|
 
-> width:width of Graphical Interactive Interface.(Unit:pixel).
-> height:height of Graphical Interactive Interface.(Unit:pixel).
+> width:width of Graphical Interactive Interface.(Unit:pixel).  
+> height:height of Graphical Interactive Interface.(Unit:pixel).  
 > filename:filename of Graphical Interactive Interface page without file extension.
+
+### Drone Platform’s Status Data
+Payloads can use the power of drone platform and communicate with the flight 
+control system to get valuable information.the following data is supported:  
+
+*Status of flight control system*  
+
+|Status ID| Status|
+|---|---|
+|0x01|Flight attitude|
+|0x02|Battery status|
+|0x03|GPS position|
+
+*Status of GCS/MCS*
+
+|Status ID| Status|
+|---|---|
+|0x01|GCS/MCS time|
+
+*Request Frames*  
+
+* GET_PLATFORM_STATUS  
+Payload send `GET_PLATFORM_STATUS` data frame to get Status from flight 
+control system.The frame details are shown in the figure below:  
+
+|FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
+|------------------|---------------|-------------------|-------|------|
+|0xA5|0xFB|4|uint8_t Status_ID<br/>uint8_t frequency|crc|
+
+> Status_ID: the Status ID in the above table.  
+> frequency: frequency of the Status data frame.  
+
+* GET_GCS_STATUS  
+Payload send `GET_GCS_STATUS` data frame to get Status from GCS/MCS
+.The frame details are shown in the figure below:  
+
+|FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
+|------------------|---------------|-------------------|-------|------|
+|0xA5|0x0B|3|uint8_t Status_ID|crc|
+
+> Status_ID: the Status ID in the above table.  
+
+*Status Frames*  
+
+ The control station(GCS/MCS) or flight control system sends the status data to
+ Payloads according to the requested frequency after the Payloads requests to 
+ obtain the above status data, these are the status data frames:  
+
+* ATTITUDE
+
+|FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
+|------------------|---------------|-------------------|-------|------|
+|0xA5|0xFA|15|uint8_t Status_ID<br/>float pitch<br/>float roll<br/>float yaw|crc|
+
+> Status_ID:0x01.
+> pitch,roll,yaw: Euler angles
+
+* BATTERY
+
+|FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
+|------------------|---------------|-------------------|-------|------|
+|0xA5|0xFA|15|uint8_t Status_ID<br/>uint8_t percentage |crc|
+
+> Status_ID:0x02.
+> percentage: percentage of power.
+
+* GPS
+
+|FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
+|------------------|---------------|-------------------|-------|------|
+|0xA5|0xFA|15|uint8_t Status_ID<br/>uint32_t altitude<br/>uint32_t latidute<br/>uint32_t longitude|crc|
+
+> Status_ID:0x03.
+> altitude: altitude of drone platform.(Unit:cm)
+> latidute: the value of latidute * 10^7.
+> longitude: the value of longitude * 10^7.
+
+* GCS_TIME
+
+|FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
+|------------------|---------------|-------------------|-------|------|
+|0xA5|0x13|8|uint16_t year<br/>uint8_t month<br/>uint8_t day<br/>uint8_t hour<br/>uint8_t minute|crc|
+
+
+### Data Transparent Transmission<a name="data_transparent_transmission"></a>
+Data Transparent Transmission allows user to send custom data streams 
+between the Payloads and the Graphical Interactive Interface web page.
+The control station and drone platform does not parse the data field and 
+transparently transmit bytes.Users can customize the data field protocol 
+and parse the data for interaction on Graphical Interactive Interface web 
+page using JavaScript.  
+*Data Stream*  
+![datastream](../resources/datastream.jpeg)
+
+*Data Frame*
+
+|FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
+|------------------|---------------|-------------------|-------|------|
+|0xA5|0xEF|n+2|uint8_t custom_data[n]|crc|
+
+> custom_data: the data defined by users and maximum length is 253 bytes.   
 
 # CRC Algorithm <a name="crc_table"></a>
 ```
