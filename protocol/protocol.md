@@ -126,7 +126,7 @@ in the figure below:
 > vender_ID: unique vender ID, Please confirm with MMC before using this ID.  
 > payload_type:the payload type define by user.  
 > UID: unique payload ID, usually use the CPU id of payload.  
-> version:payload software version.
+> version:payload software version.  
 
 * GET_PAGE  
 GCS/MCS send `GET_PAGE` data frame at a frequency of 1 Hz to get 
@@ -203,7 +203,7 @@ Payload send `GET_GCS_STATUS` data frame to get Status from GCS/MCS
 |------------------|---------------|-------------------|-------|------|
 |0xA5|0xFA|15|uint8_t Status_ID<br/>float pitch<br/>float roll<br/>float yaw|crc|
 
-> Status_ID:0x01.
+> Status_ID:0x01.  
 > pitch,roll,yaw: Euler angles
 
 * BATTERY
@@ -212,7 +212,7 @@ Payload send `GET_GCS_STATUS` data frame to get Status from GCS/MCS
 |------------------|---------------|-------------------|-------|------|
 |0xA5|0xFA|15|uint8_t Status_ID<br/>uint8_t percentage |crc|
 
-> Status_ID:0x02.
+> Status_ID:0x02.  
 > percentage: percentage of power.
 
 * GPS
@@ -221,10 +221,10 @@ Payload send `GET_GCS_STATUS` data frame to get Status from GCS/MCS
 |------------------|---------------|-------------------|-------|------|
 |0xA5|0xFA|15|uint8_t Status_ID<br/>uint32_t altitude<br/>uint32_t latidute<br/>uint32_t longitude|crc|
 
-> Status_ID:0x03.
-> altitude: altitude of drone platform.(Unit:cm)
-> latidute: the value of latidute * 10^7.
-> longitude: the value of longitude * 10^7.
+> Status_ID:0x03.  
+> altitude: altitude of drone platform.(Unit:cm)  
+> latidute: the value of latidute * 10^7.  
+> longitude: the value of longitude * 10^7.  
 
 * GCS_TIME
 
