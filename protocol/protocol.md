@@ -19,14 +19,23 @@ page written in HTML and JavaScript language.There is a WebSocket server running
 GCS/MCS and its IP address is `127.0.0.1:6666`. The Graphical Interactive Interface web page 
 should actively connect to the WebSocket server when it be loaded by GCS/MCS to transmit 
 data with payloads.  
+
 Custom Graphical Interactive Interface consists of two main files:  
 
 - An HTML file describing the interface.  
 - A PNG image file of Payload with a resolution of 200*200.  
 
-These two files must use the same file name and put them in the 
-`[MMC GCS/MCS software installation path]\payloads` folder.  
-
+These two files should be placed in the same folder and this folder should have the same
+ name as the two files.The name must follow *[Payload File Name](#filename)* rules.Then put 
+ them in `[MMC GCS/MCS software installation path]\payloads` folder.  
+ *File structure:*  
+ [MMC GCS/MCS software installation path]  
+|
+|-payloads  
+ -------------|-[PayloadFileName]  
+---------------------------------------|-[PayloadFileName].html  
+---------------------------------------|-[PayloadFileName].png  
+ 
 [Payload Identification Procedure](#payload_identification) is performed at MMC GCS/MCS 
 and Payloads startup. Once the payload is successfully identified, the payload image will be 
 displayed on the top right of the software.  
@@ -187,6 +196,11 @@ is received.The data frame details are shown in the figure below:
 > width:width of Graphical Interactive Interface.(Unit:pixel).  
 > height:height of Graphical Interactive Interface.(Unit:pixel).  
 > filename:filename of Graphical Interactive Interface page without file extension.
+
+**FileName**<a name="filename"></a>  
+The file name consists of manufacturer, payload type and payload model，and
+ is connected by an underscore in the middle.  
+ eg:MMC_Gimbal_Z40
 
 ### Drone Platform’s Status Data
 Payloads can use the power of drone platform and communicate with the flight 
