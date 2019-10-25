@@ -32,7 +32,7 @@ These two files should be placed in the same folder and this folder should have 
  [MMC GCS/MCS software installation path]  
 |  
 |-pack  
---------|-MountWeb
+--------|-MountWeb  
 -----------------------|-[PayloadFileName]  
 ------------------------------------------------|-[PayloadFileName].html  
 ------------------------------------------------|-[PayloadFileName].png  
