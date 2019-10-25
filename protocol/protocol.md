@@ -31,10 +31,11 @@ These two files should be placed in the same folder and this folder should have 
  *File structure:*  
  [MMC GCS/MCS software installation path]  
 |  
-|-payloads  
- -------------|-[PayloadFileName]  
----------------------------------------|-[PayloadFileName].html  
----------------------------------------|-[PayloadFileName].png  
+|-pack  
+--------|-MountWeb
+-----------------------|-[PayloadFileName]  
+------------------------------------------------|-[PayloadFileName].html  
+------------------------------------------------|-[PayloadFileName].png  
  
 [Payload Identification Procedure](#payload_identification) is performed at MMC GCS/MCS 
 and Payloads startup. Once the payload is successfully identified, the payload image will be 
