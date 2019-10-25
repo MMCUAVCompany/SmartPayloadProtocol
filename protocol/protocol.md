@@ -30,7 +30,7 @@ These two files should be placed in the same folder and this folder should have 
  them in `[MMC GCS/MCS software installation path]\payloads` folder.  
  *File structure:*  
  [MMC GCS/MCS software installation path]  
-|
+|  
 |-payloads  
  -------------|-[PayloadFileName]  
 ---------------------------------------|-[PayloadFileName].html  
@@ -168,11 +168,11 @@ in the figure below:
 
 |FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
 |------------------|---------------|-------------------|-------|------|
-|0xA5|0xFE|14|uint16_t vender_ID<br/>uint16_t payload_type</br>uint32_t UID</br>uint32_t version|crc|
+|0xA5|0xFE|26|uint16_t vender_ID<br/>uint16_t payload_type</br>uint32_t UID[4]</br>uint32_t version|crc|
 
 > vender_ID: unique vender ID, Please confirm with MMC before using this ID.  
 > payload_type:the payload type define by user.  
-> UID: unique payload ID, usually use the CPU id of payload.  
+> UID: 128bit unique payload ID, usually use the payload CPU id.  
 > version:payload software version.  
 
 * GET_PAGE  
