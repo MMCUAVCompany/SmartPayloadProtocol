@@ -16,8 +16,8 @@ interactive interface web page and MMC drone platform.
 # Graphical Interactive Interface
 Graphical Interactive Interface is used for payload control and status monitoring, It's a web 
 page written in HTML and JavaScript language.There is a WebSocket server running in MMC 
-GCS/MCS and its IP address is `127.0.0.1:6666`. The Graphical Interactive Interface web page 
-should actively connect to the WebSocket server when it be loaded by GCS/MCS to transmit 
+GCS/MCS and its default IP address is `127.0.0.1:138`, The port number can be changed by user. 
+The Graphical Interactive Interface web page should actively connect to the WebSocket server when it be loaded by GCS/MCS to transmit 
 data with payloads.  
 
 Custom Graphical Interactive Interface consists of two main files:  
