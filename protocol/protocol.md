@@ -171,10 +171,10 @@ in the figure below:
 |------------------|---------------|-------------------|-------|------|
 |0xA5|0xFE|26|uint16_t vender_ID<br/>uint16_t payload_type</br>uint32_t UID[4]</br>uint32_t version|crc|
 
-> vender_ID: unique vender ID, Please confirm with MMC before using this ID.  
-> payload_type:the payload type define by user.  
-> UID: 128bit unique payload ID, usually use the payload CPU id.  
-> version:payload software version.  
+> **vender_ID**: unique vender ID, Please confirm with MMC before using this ID.  
+> **payload_type**:the payload type define by user.  
+> **UID**: 128bit unique payload ID, usually use the payload CPU id.  
+> **version**:payload software version.  
 
 * GET_PAGE  
 GCS/MCS send `GET_PAGE` data frame at a frequency of 1 Hz to get 
@@ -194,9 +194,9 @@ is received.The data frame details are shown in the figure below:
 |------------------|---------------|-------------------|-------|------|
 |0xA5|0xFC|n+6|uint16_t width<br/>uint16_t height</br>uint8_t filename[n]|crc|
 
-> width:width of Graphical Interactive Interface.(Unit:pixel).  
-> height:height of Graphical Interactive Interface.(Unit:pixel).  
-> filename:filename of Graphical Interactive Interface page without file extension.
+> **width**:width of Graphical Interactive Interface.(Unit:pixel).  
+> **height**:height of Graphical Interactive Interface.(Unit:pixel).  
+> **filename**:filename of Graphical Interactive Interface page without file extension.
 
 **FileName**<a name="filename"></a>  
 The file name consists of manufacturer, payload type and payload model，and
@@ -215,12 +215,6 @@ control system to get valuable information.the following data is supported:
 |0x02|Battery status|
 |0x03|GPS position|
 
-*Status of GCS/MCS*
-
-|Status ID| Status|
-|---|---|
-|0x01|GCS/MCS time|
-
 *Request Frames*  
 
 * GET_PLATFORM_STATUS  
@@ -231,18 +225,8 @@ control system.The frame details are shown in the figure below:
 |------------------|---------------|-------------------|-------|------|
 |0xA5|0xFB|4|uint8_t Status_ID<br/>uint8_t frequency|crc|
 
-> Status_ID: the Status ID in the above table.  
-> frequency: frequency of the Status data frame.  
-
-* GET_GCS_STATUS  
-Payload send `GET_GCS_STATUS` data frame to get Status from GCS/MCS
-.The frame details are shown in the figure below:  
-
-|FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
-|------------------|---------------|-------------------|-------|------|
-|0xA5|0x0B|3|uint8_t Status_ID|crc|
-
-> Status_ID: the Status ID in the above table.  
+> **Status_ID**: the Status ID in the above table.  
+> **frequency**: frequency of the Status data frame.  
 
 *Status Frames*  
 
@@ -256,8 +240,8 @@ Payload send `GET_GCS_STATUS` data frame to get Status from GCS/MCS
 |------------------|---------------|-------------------|-------|------|
 |0xA5|0xFA|15|uint8_t Status_ID<br/>float pitch<br/>float roll<br/>float yaw|crc|
 
-> Status_ID:0x01.  
-> pitch,roll,yaw: Euler angles
+> **Status_ID**:0x01.  
+> **pitch,roll,yaw**: Euler angles  
 
 * BATTERY
 
@@ -265,8 +249,8 @@ Payload send `GET_GCS_STATUS` data frame to get Status from GCS/MCS
 |------------------|---------------|-------------------|-------|------|
 |0xA5|0xFA|15|uint8_t Status_ID<br/>uint8_t percentage |crc|
 
-> Status_ID:0x02.  
-> percentage: percentage of power.
+> **Status_ID**:0x02.  
+> **percentage**: percentage of power.
 
 * GPS
 
@@ -274,16 +258,42 @@ Payload send `GET_GCS_STATUS` data frame to get Status from GCS/MCS
 |------------------|---------------|-------------------|-------|------|
 |0xA5|0xFA|15|uint8_t Status_ID<br/>uint32_t altitude<br/>uint32_t latidute<br/>uint32_t longitude|crc|
 
-> Status_ID:0x03.  
-> altitude: altitude of drone platform.(Unit:cm)  
-> latidute: the value of latidute * 10^7.  
-> longitude: the value of longitude * 10^7.  
+> **Status_ID**:0x03.  
+> **altitude**: altitude of drone platform.(Unit:cm)  
+> **latidute**: the value of latidute * 10^7.  
+> **longitude**: the value of longitude * 10^7.  
 
-* GCS_TIME
+### Info From GCS/MCS
+Graphical Interactive Interface WebPage can obtain the coordinates of the video screen when the user clicks.  
+
+*Coordinates Frame*  
 
 |FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
 |------------------|---------------|-------------------|-------|------|
-|0xA5|0x13|8|uint16_t year<br/>uint8_t month<br/>uint8_t day<br/>uint8_t hour<br/>uint8_t minute|crc|
+|0xA5|0xFE|10|uint16_t x<br/>uint16_t y<br/>uint16_t res1<br/>uint16_t res2|crc|
+
+> **x**:the x Coordinates of user clicks, The variable value range is [-960, 960].  
+> **y**:the y Coordinates of user clicks, The variable value range is [-540, 540].  
+> **res1,res2**:reserved.  
+
+![data_frame](../resources/important1.jpg)*The right and bottom of the screen are the positive direction of the coordinates.*  
+
+*Control Frame*
+
+Graphical Interactive Interface WebPage can get physical button status in GCS/MCS.
+
+|FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
+|------------------|---------------|-------------------|-------|------|
+|0xA5|0xFD|10|uint8_t photo<br/>uint8_t record<br>uint8_t zoom<br/>uint8_t gimbal_mode<br/>uint8_t camera_mode<br/>uint8_t res1<br/>uint8_t res2<br/>uint16_t pitch<br/>uint16_t yaw<br/>uint16_t res3<br/>uint16_t res4<br/>|crc|
+
+> **photo**:the status of photo button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.  
+> **record**:the status of record button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.  
+> **zoom**:`1` means zoom in, `-1` means zoom out, `0`means the button is released.    
+> **gimbal_mode**:`0` means LOCK mode, `1` means FOLLOW mode, `2`means RESET mode.    
+> **camera_mode**: the status of camera_mode button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.   
+> **pitch**:the status of pitch control wheel in GCS/MCS. The variable value range is [1000, 2000].`1500`means the wheel is released.   
+> **yaw**:the status of yaw control wheel in GCS/MCS.The variable value range is [1000, 2000].`1500`means the wheel is released.   
+> **res1,res2,res3,res4**:reserved.  
 
 
 ### Data Transparent Transmission<a name="data_transparent_transmission"></a>
@@ -302,5 +312,5 @@ page using JavaScript.
 |------------------|---------------|-------------------|-------|------|
 |0xA5|0xEF|n+2|uint8_t custom_data[n]|crc|
 
-> custom_data: the data defined by users and maximum length is 253 bytes.   
+> **custom_data**: the data defined by users and maximum length is 253 bytes.   
 
