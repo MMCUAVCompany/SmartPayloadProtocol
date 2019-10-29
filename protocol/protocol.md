@@ -247,7 +247,7 @@ control system.The frame details are shown in the figure below:
 
 |FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
 |------------------|---------------|-------------------|-------|------|
-|0xA5|0xFA|15|uint8_t Status_ID<br/>uint8_t percentage |crc|
+|0xA5|0xFA|4|uint8_t Status_ID<br/>uint8_t percentage |crc|
 
 > **Status_ID**:0x02.  
 > **percentage**: percentage of power.
@@ -284,7 +284,7 @@ Graphical Interactive Interface WebPage can get physical button status in GCS/MC
 
 |FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
 |------------------|---------------|-------------------|-------|------|
-|0xA5|0xFD|10|uint8_t photo<br/>uint8_t record<br>uint8_t zoom<br/>uint8_t gimbal_mode<br/>uint8_t camera_mode<br/>uint8_t res1<br/>uint8_t res2<br/>uint16_t pitch<br/>uint16_t yaw<br/>uint16_t res3<br/>uint16_t res4<br/>|crc|
+|0xA5|0xFD|17|uint8_t photo<br/>uint8_t record<br>uint8_t zoom<br/>uint8_t gimbal_mode<br/>uint8_t camera_mode<br/>uint8_t res1<br/>uint8_t res2<br/>uint16_t pitch<br/>uint16_t yaw<br/>uint16_t res3<br/>uint16_t res4<br/>|crc|
 
 > **photo**:the status of photo button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.  
 > **record**:the status of record button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.  
@@ -310,7 +310,8 @@ page using JavaScript.
 
 |FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
 |------------------|---------------|-------------------|-------|------|
-|0xA5|0xEF|n+2|uint8_t custom_data[n]|crc|
+|0xA5|type|n+2|uint8_t custom_data[n]|crc|
 
+> **type**:data type defined by user.Do not use already defined data types:0xC0~0xFF.
 > **custom_data**: the data defined by users and maximum length is 253 bytes.   
 
