@@ -16,7 +16,7 @@ interactive interface web page and MMC drone platform.
 # Graphical Interactive Interface
 Graphical Interactive Interface is used for payload control and status monitoring, It's a web 
 page written in HTML and JavaScript language.There is a WebSocket server running in MMC 
-GCS/MCS and its default IP address is `127.0.0.1:138`, The port number can be changed by user. 
+GCS/MCS and its default IP address is `127.0.0.1:1234`, The port number can be changed by user. 
 The Graphical Interactive Interface web page should actively connect to the WebSocket server when it be loaded by GCS/MCS to transmit 
 data with payloads.  
 
@@ -42,7 +42,7 @@ and Payloads startup. Once the payload is successfully identified, the payload i
 displayed on the top right of the software.  
 ![data_frame](../resources/gcs.jpeg)  
 If the payload image is clicked by users, GCS/MCS will load the HTML web page.
-![CGII](../resources/CGII.jpeg)  
+![CGII](../resources/demo.png)  
 
 
 # Data Transmission 
@@ -295,6 +295,19 @@ Graphical Interactive Interface WebPage can get physical button status in GCS/MC
 > **yaw**:the status of yaw control wheel in GCS/MCS.The variable value range is [1000, 2000].`1500`means the wheel is released.   
 > **res1,res2,res3,res4**:reserved.  
 
+*Position Frame*
+
+Graphical Interactive Interface WebPage can get GPS status From GCS/MCS.
+
+|FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
+|------------------|---------------|-------------------|-------|------|
+|0xA5|0xFC|16|uint8_t satellites<br/>uint8_t status<br/>uint32_t altitude<br>uint32_t latitude<br/>uint32_t longitude|crc|
+
+> **satellites**: Number of satellites.  
+> **status**:the status of gps fix. `1` means 2D fixed, `2` means 3D fixed, `0`means no fixed.  
+> **altitude**: altitude of drone platform.(Unit:cm)  
+> **latidute**: the value of latidute * 10^7 .  
+> **longitude**: the value of longitude * 10^7.  
 
 ### Data Transparent Transmission<a name="data_transparent_transmission"></a>
 Data Transparent Transmission allows user to send custom data streams 
