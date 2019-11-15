@@ -270,7 +270,7 @@ Graphical Interactive Interface WebPage can obtain the coordinates of the video 
 
 |FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
 |------------------|---------------|-------------------|-------|------|
-|0xA5|0xFE|10|uint16_t x<br/>uint16_t y<br/>uint16_t res1<br/>uint16_t res2|crc|
+|0xA5|0xF7|10|uint16_t x<br/>uint16_t y<br/>uint16_t res1<br/>uint16_t res2|crc|
 
 > **x**:the x Coordinates of user clicks, The variable value range is [-960, 960].  
 > **y**:the y Coordinates of user clicks, The variable value range is [-540, 540].  
@@ -284,7 +284,7 @@ Graphical Interactive Interface WebPage can get physical button status in GCS/MC
 
 |FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
 |------------------|---------------|-------------------|-------|------|
-|0xA5|0xFD|21|uint8_t photo<br/>uint8_t record<br>uint8_t zoom<br/>uint8_t gimbal_mode<br/>uint8_t camera_mode<br/>uint8_t F1<br/>uint8_t F2<br/>uint8_t F3<br/>uint8_t F4<br/>uint8_t res1<br/>uint8_t res2<br/>uint16_t pitch<br/>uint16_t yaw<br/>uint16_t res3<br/>uint16_t res4<br/>|crc|
+|0xA5|0xF8|21|uint8_t photo<br/>uint8_t record<br>uint8_t zoom<br/>uint8_t gimbal_mode<br/>uint8_t camera_mode<br/>uint8_t F1<br/>uint8_t F2<br/>uint8_t F3<br/>uint8_t F4<br/>uint8_t res1<br/>uint8_t res2<br/>uint16_t pitch<br/>uint16_t yaw<br/>uint16_t res3<br/>uint16_t res4<br/>|crc|
 
 > **photo**:the status of photo button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.  
 > **record**:the status of record button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.  
@@ -302,7 +302,7 @@ Graphical Interactive Interface WebPage can get GPS status From GCS/MCS.
 
 |FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
 |------------------|---------------|-------------------|-------|------|
-|0xA5|0xFC|16|uint8_t satellites<br/>uint8_t status<br/>uint32_t altitude<br>uint32_t latitude<br/>uint32_t longitude|crc|
+|0xA5|0xF9|16|uint8_t satellites<br/>uint8_t status<br/>uint32_t altitude<br>uint32_t latitude<br/>uint32_t longitude|crc|
 
 > **satellites**: Number of satellites.  
 > **status**:the status of gps fix. `1` means 2D fixed, `2` means 3D fixed, `0`means no fixed.  
