@@ -278,13 +278,13 @@ Graphical Interactive Interface WebPage can obtain the coordinates of the video 
 
 ![data_frame](../resources/important1.jpg)*The right and bottom of the screen are the positive direction of the coordinates.*  
 
-*Control Frame*
+*Button Control Frame*
 
 Graphical Interactive Interface WebPage can get physical button status in GCS/MCS.
 
 |FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
 |------------------|---------------|-------------------|-------|------|
-|0xA5|0xF8|21|uint8_t photo<br/>uint8_t record<br>uint8_t zoom<br/>uint8_t gimbal_mode<br/>uint8_t camera_mode<br/>uint8_t F1<br/>uint8_t F2<br/>uint8_t F3<br/>uint8_t F4<br/>uint8_t res1<br/>uint8_t res2<br/>uint16_t pitch<br/>uint16_t yaw<br/>uint16_t res3<br/>uint16_t res4<br/>|crc|
+|0xA5|0xF8|13|uint8_t photo<br/>uint8_t record<br>uint8_t zoom<br/>uint8_t gimbal_mode<br/>uint8_t camera_mode<br/>uint8_t F1<br/>uint8_t F2<br/>uint8_t F3<br/>uint8_t F4<br/>uint8_t res1<br/>uint8_t res2|crc|
 
 > **photo**:the status of photo button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.  
 > **record**:the status of record button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.  
@@ -292,6 +292,16 @@ Graphical Interactive Interface WebPage can get physical button status in GCS/MC
 > **gimbal_mode**:`0` means LOCK mode, `1` means FOLLOW mode, `2`means RESET mode.    
 > **F1-F4**:the status of additional function button 1-4. `1` means the button is pressed, `0`means the button is released. 
 > **camera_mode**: the status of camera_mode button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.   
+> **res1,res2**:reserved.  
+
+*Attitude Control Frame*
+
+Graphical Interactive Interface WebPage can get physical button status in GCS/MCS.
+
+|FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
+|------------------|---------------|-------------------|-------|------|
+|0xA5|0xF6|10|uint16_t pitch<br/>uint16_t yaw<br/>uint16_t res3<br/>uint16_t res4<br/>|crc|
+
 > **pitch**:the status of pitch control wheel in GCS/MCS. The variable value range is [1000, 2000].`1500`means the wheel is released.   
 > **yaw**:the status of yaw control wheel in GCS/MCS.The variable value range is [1000, 2000].`1500`means the wheel is released.   
 > **res1,res2,res3,res4**:reserved.  
