@@ -264,7 +264,7 @@ control system.The frame details are shown in the figure below:
 > **longitude**: the value of longitude * 10^7.  
 
 ### Info From GCS/MCS
-Graphical Interactive Interface WebPage can obtain the coordinates of the video screen when the user clicks.  
+Graphical Interactive Interface WebPage can get the click point coordinates on the video screen when user clicks.  
 
 *Coordinates Frame*  
 
@@ -304,7 +304,7 @@ Graphical Interactive Interface WebPage can get physical button status in GCS/MC
 
 > **pitch**:the status of pitch control wheel in GCS/MCS. The variable value range is [1000, 2000].`1500`means the wheel is released.   
 > **yaw**:the status of yaw control wheel in GCS/MCS.The variable value range is [1000, 2000].`1500`means the wheel is released.   
-> **res1,res2,res3,res4**:reserved.  
+> **res3,res4**:reserved.  
 
 *Position Frame*
 
