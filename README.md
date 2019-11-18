@@ -34,7 +34,7 @@ Any embedded systems that support CAN communications.
 2. [Software Protocol](./protocol/protocol.md)
 
 # Quick start
-there is a [reference demo](.Demo/MMC_Payload_Demo/MMC_Payload_Demo.html).
+there is a [reference demo](./Demo/MMC_Payload_Demo/MMC_Payload_Demo.html).
 
 # R&Q
 
