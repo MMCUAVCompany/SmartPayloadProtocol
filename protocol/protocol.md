@@ -41,8 +41,16 @@ These two files should be placed in the same folder and this folder should have 
 and Payloads startup. Once the payload is successfully identified, the payload image will be 
 displayed on the top right of the software.  
 ![data_frame](../resources/gcs.jpeg)  
-If the payload image is clicked by users, GCS/MCS will load the HTML web page.
+If the payload image is clicked by users, GCS/MCS will load the HTML web page.   
+
 ![CGII](../resources/demo.png)  
+
+Once the WebSocket connection is established，the HTML web page should send `PayloadFileName`
+to GCS/MCS use the following format.   
+```
+webSocket.send("name:PayloadFileName");
+```
+
 
 
 # Data Transmission 
