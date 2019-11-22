@@ -296,7 +296,7 @@ Graphical Interactive Interface WebPage can get physical button status in GCS/MC
 
 > **photo**:the status of photo button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.  
 > **record**:the status of record button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.  
-> **zoom**:`1` means zoom in, `2` means zoom out, `0`means the button is released.    
+> **zoom**:`2` means zoom in, `0` means zoom out, `1`means zoom stop.    
 > **gimbal_mode**:`0` means LOCK mode, `1` means FOLLOW mode, `2`means RESET mode.    
 > **F1-F4**:the status of additional function button 1-4. `1` means the button is pressed, `0`means the button is released. 
 > **camera_mode**: the status of camera_mode button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.   
