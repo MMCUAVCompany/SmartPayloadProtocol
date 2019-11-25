@@ -222,6 +222,7 @@ control system to get valuable information.the following data is supported:
 |0x01|Flight attitude|
 |0x02|Battery status|
 |0x03|GPS position|
+|0x04|Desired attitude|
 
 *Request Frames*  
 
@@ -234,7 +235,7 @@ control system.The frame details are shown in the figure below:
 |0xA5|0xFB|4|uint8_t Status_ID<br/>uint8_t frequency|crc|
 
 > **Status_ID**: the Status ID in the above table.  
-> **frequency**: frequency of the Status data frame.  
+> **frequency**: frequency of the Status data frame.(Unit:Hz)  
 
 *Status Frames*  
 
@@ -249,7 +250,7 @@ control system.The frame details are shown in the figure below:
 |0xA5|0xFA|15|uint8_t Status_ID<br/>float pitch<br/>float roll<br/>float yaw|crc|
 
 > **Status_ID**:0x01.  
-> **pitch,roll,yaw**: Euler angles  
+> **pitch,roll,yaw**: Euler angles.(Unit:degree)   
 
 * BATTERY
 
@@ -270,6 +271,15 @@ control system.The frame details are shown in the figure below:
 > **altitude**: altitude of drone platform.(Unit:cm)  
 > **latidute**: the value of latidute * 10^7.  
 > **longitude**: the value of longitude * 10^7.  
+
+*DESIRED ATTITUDE
+
+|FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
+|------------------|---------------|-------------------|-------|------|
+|0xA5|0xFA|15|uint8_t Status_ID<br/>float pitch<br/>float roll<br/>float yaw|crc|
+
+> **Status_ID**:0x04.  
+> **pitch,roll,yaw**: Desired euler angles.(Unit:degree)
 
 ### Info From GCS/MCS
 Graphical Interactive Interface WebPage can get the click point coordinates on the video screen when user clicks.  
