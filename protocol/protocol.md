@@ -297,12 +297,19 @@ Graphical Interactive Interface WebPage can get the click point coordinates on t
 ![data_frame](../resources/important1.jpg)*The right and bottom of the screen are the positive direction of the coordinates.*  
 
 *Button Control Frame*
-
-Graphical Interactive Interface WebPage can get physical button status in GCS/MCS.
-
 |FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
 |------------------|---------------|-------------------|-------|------|
-|0xA5|0xF8|13|uint8_t photo<br/>uint8_t record<br>uint8_t zoom<br/>uint8_t gimbal_mode<br/>uint8_t camera_mode<br/>uint8_t F1<br/>uint8_t F2<br/>uint8_t F3<br/>uint8_t F4<br/>uint8_t res1<br/>uint8_t res2|crc|
+|0xA5|0xF80|3|uint8_t photo|crc|
+|0xA5|0xF81|3|uint8_t record|crc|
+|0xA5|0xF82|3|uint8_t zoom|crc|
+|0xA5|0xF83|3|uint8_t gimbal_mode|crc|
+|0xA5|0xF84|3|uint8_t camera_mode|crc|
+|0xA5|0xF85|3|uint8_t F1|crc|
+|0xA5|0xF86|3|uint8_t F2|crc|
+|0xA5|0xF87|3|uint8_t F3|crc|
+|0xA5|0xF88|3|uint8_t F4|crc|
+|0xA5|0xF89|3|uint8_t res1|crc|
+|0xA5|0xF8A|3|uint8_t res2|crc|
 
 > **photo**:the status of photo button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.  
 > **record**:the status of record button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.  
@@ -310,7 +317,7 @@ Graphical Interactive Interface WebPage can get physical button status in GCS/MC
 > **gimbal_mode**:`0` means LOCK mode, `1` means FOLLOW mode, `2`means RESET mode.    
 > **F1-F4**:the status of additional function button 1-4. `1` means the button is pressed, `0`means the button is released. 
 > **camera_mode**: the status of camera_mode button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.   
-> **res1,res2**:reserved.  
+> **res1,res2**:reserved. 
 
 *Attitude Control Frame*
 
