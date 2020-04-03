@@ -1,0 +1,13 @@
+o1heap.c:119:21:isPowerOf2	16	static
+o1heap.c:126:24:log2Floor	24	static
+o1heap.c:142:24:log2Ceil	24	static
+o1heap.c:151:23:pow2	16	static
+o1heap.c:157:21:invoke	16	static
+o1heap.c:167:21:interlink	16	static
+o1heap.c:181:21:rebin	24	static
+o1heap.c:203:21:unbin	24	static
+o1heap.c:234:17:o1heapInit	48	static
+o1heap.c:291:7:o1heapAllocate	64	static
+o1heap.c:385:6:o1heapFree	32	static
+o1heap.c:457:6:o1heapDoInvariantsHold	64	static
+o1heap.c:501:19:o1heapGetDiagnostics	48	static

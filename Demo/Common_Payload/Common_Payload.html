@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link type="text/css" rel="stylesheet" href="./MMC_Gimbal_Z40.css" />
+
+</head>
+
+<body>
+    <div class="box">
+        <div class="navigation" id="navigation">
+            <table>
+                <tr>
+                    <td>Pitch</td>
+                    <td>Roll</td>
+                    <td>Yaw</td>
+                </tr>
+                <tr>
+                    <td><span class="feedback" id="pitchAngle">0.00</span></td>
+                    <td><span class="feedback" id="rollAngle">0.00</span></td>
+                    <td><span class="feedback" id="yawAngle">0.00</span></td>
+                </tr>
+                <tr>
+                    <td>Photo</td>
+                    <td></td>
+                    <td>Zoom</td>
+                </tr>
+                <tr>
+                    <td><span class="feedback" id="photoCount">0</span></td>
+                    <td></td>
+                    <td><span class="feedback" id="ZoomTimes">0</span></td>
+                </tr>
+                <tr>
+                    <td>version:</td>
+
+                    <td colspan="2"><span class="feedback" id="version">Unconnected</span></td>
+                </tr>
+
+            </table>
+        </div>
+
+        <div id="gimbal">
+            Speed:
+            <select name="ControlSpeed" id="ctrl_speed" onchange="gimbal_change_ctrl_speed(this.options[this.options.selectedIndex].value)">
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3" selected>3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+            </select>
+            <span>Click:</span>
+            <input class="clickMode" id="moveMode" type="button" value="Move" onclick="click_mode_ctrl(1)">
+            <input class="clickMode" id="focusMode" type="button" value="Focus" onclick="click_mode_ctrl(6)">
+
+            <hr>
+            <span>GimbalMode:</span>
+            <input class="gimbalMode" id="lockMode" type="button" value="Lock" onclick="gimbal_mode_ctrl(0)">
+            <input class="gimbalMode" id="followMode" type="button" value="Follow" onclick="gimbal_mode_ctrl(1)">
+            <input class="gimbalMode" id="resetMode" type="button" value="Reset" onclick="gimbal_mode_ctrl(2)">
+
+            <hr>
+
+            <span>CameraMode:</span>
+            <input class="cameraMode" id="movieMode" type="button" value="Movie" onclick="camera_mode_ctrl(0)">
+            <input class="cameraMode" id="photoMode" type="button" value="Photo" onclick="camera_mode_ctrl(2)">
+            <hr> IA/MF:
+            <img class="cameraFunc" id="AUTOMode" src="./ic_brightness_auto_black_48dp.png" alt="" onclick="ia_mode(0)">
+            <img class="cameraFunc" id="MFMode" src="./ic_MF_black_48dp.png" alt="" onclick="ia_mode(1)">
+
+            <img class="cameraFunc" class="MFunction" id="backlight" src="./ic_highlight_black_48dp.png" alt="" onclick="set_backlight()">
+            <img class="cameraFunc" class="MFunction" id="defog" src="./ic_blur_off_black_48dp.png" alt="" onclick="set_defog()">
+            <img class="cameraFunc" class="MFunction" id="nightmode" src="./ic_brightness_3_black_48dp.png" alt="" onclick="set_nightmode()">
+
+
+            <table>
+                <tr>
+                    <td><img class="cameraFunc" src="./ic_camera_alt_black_48dp.png" alt="" onclick="take_photo()"></td>
+                    <td></td>
+                    <td><img class="cameraFunc" id="recordStatus" src="./ic_videocam_black_48dp.png" alt="" onclick="record()"></td>
+                </tr>
+                <tr>
+                    <td><img src="./ic_zoom_out_black_48dp.png" alt="">
+                    </td>
+
+                    <td><input id="zoom" type="range" max="2" min="0" oninput="zoom(value)" onmouseup="zoom(1)"></td>
+                    <td><img src="./ic_zoom_in_black_48dp.png" alt="">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><img src="./ic_center_focus_weak_black_48dp.png" alt="">
+                    </td>
+                    <td><input id="camerafocus" type="range" max="2" min="0" oninput="camerafocus(value)" onmouseup="camerafocus(1)"></td>
+                    <td><img src="./ic_center_focus_strong_black_48dp.png" alt="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Pitch</td>
+                    <td><input type="number" id="setPitchAngle" placeholder="0" step="0.1" maxlength="5" max="35" min="-90" value="0"></td>
+                    <td><input type="button" value="Set" onclick="change_pitch_angle()"></td>
+                </tr>
+                <tr>
+                    <td>Yaw</td>
+                    <td><input type="number" id="setYawAngle" placeholder="0" step="0.1" maxlength="5" max="145" min="-145" value="0"></td>
+                    <td><input type="button" value="Set" onclick="change_yaw_angle()"></td>
+
+
+                </tr>
+            </table>
+            <audio id="take_photo_audio" src="./takephoto.mp3"></audio>
+            <audio id="record_audio" src="./record.mp3"></audio>
+        </div>
+
+        <div id="camera">
+            <table>
+                <tr>
+                    <td><img src="./ic_flare_black_48dp.png" alt=""></td>
+                    <td>Brightness</td>
+                    <td>
+                        <select name="Brightness" onchange="set_brightness(this.options[this.options.selectedIndex].value)"> 
+                            <option value="13">-5</option> 
+                            <option value="12">-4</option>
+                            <option value="11">-3</option> 
+                            <option value="10">-2</option>
+                            <option value="9">-1</option> 
+                            <option value="0" selected>0</option>
+                            <option value="1">1</option> 
+                            <option value="2">2</option>
+                            <option value="3">3</option> 
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                         </td>
+                </tr>
+                <tr>
+                    <td><img src="./ic_filter_hdr_black_48dp.png" alt=""></td>
+                    <td>Sharpness</td>
+                    <td>
+                        <select name="Sharpness"  onchange="set_sharpness(this.options[this.options.selectedIndex].value)"> 
+                            <option value="13">-5</option> 
+                            <option value="12">-4</option>
+                            <option value="11">-3</option> 
+                            <option value="10">-2</option>
+                            <option value="9">-1</option> 
+                            <option value="0" selected>0</option>
+                            <option value="1">1</option> 
+                            <option value="2">2</option>
+                            <option value="3">3</option> 
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                     </td>
+                </tr>
+
+                <tr>
+                    <td><img src="./ic_filter_vintage_black_48dp.png" alt=""></td>
+                    <td>Saturation</td><td>
+                        <select name="Saturation" onchange="set_saturation(this.options[this.options.selectedIndex].value)"> 
+                            <option value="13">-5</option> 
+                            <option value="12">-4</option>
+                            <option value="11">-3</option> 
+                            <option value="10">-2</option>
+                            <option value="9">-1</option> 
+                            <option value="0" selected>0</option>
+                            <option value="1">1</option> 
+                            <option value="2">2</option>
+                            <option value="3">3</option> 
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                     </td>
+                </tr>
+
+                <tr>
+                    <td><img src="./ic_aspect_ratio_black_48dp.png" alt=""></td>
+                    <td>Shutter</td><td>
+                        <select name="Shutter" onchange="set_shutter(this.options[this.options.selectedIndex].value)"> 
+                            <option value="1">1/2</option> 
+                            <option value="2">1/4</option>
+                            <option value="3">1/8</option> 
+                            <option value="4">1/15</option>
+                            <option value="5">1/30</option> 
+                            <option value="8">1/60</option>
+                            <option value="9">1/100</option> 
+                            <option value="10">1/120</option>
+                            <option value="11">1/180</option> 
+                            <option value="12">1/250</option>
+                            <option value="13">1/350</option>
+                            <option value="14">1/500</option> 
+                            <option value="15">1/750</option>
+                            <option value="16">1/1000</option> 
+                            <option value="17">1/1500</option>
+                            <option value="18">1/2000</option>
+                        </td>
+                </tr>
+                <tr>
+                    <td><img src="./ic_camera_black_48dp.png" alt=""></td>
+                    <td>IRIS</td><td>
+                        <select name="IRIS" onchange="set_IRIS(this.options[this.options.selectedIndex].value)"> 
+                            <option value="5">2</option> 
+                            <option value="7">2.4</option>
+                            <option value="9">2.8</option> 
+                            <option value="11">3.6</option>
+                            <option value="13">4</option> 
+                            <option value="15">4.8</option>
+                            <option value="17">5.6</option> 
+                            <option value="19">6.8</option>
+                            <option value="21">8</option> 
+                            <option value="23">9.6</option>
+                            <option value="25">11</option>
+                            <option value="27">14</option> 
+                            <option value="29">16</option>
+                        </td>
+                </tr>
+
+                <tr>
+                    <td><img src="./ic_filter_b_and_w_black_48dp.png" alt=""></td>
+                    <td>W/B</td><td>
+                        <select name="W/B" onchange="set_WB(this.options[this.options.selectedIndex].value)"> 
+                            <option value="0">AUTO</option> 
+                            <option value="2">Room1</option>
+                            <option value="11">Lamp</option> 
+                            <option value="12">Cloud</option>
+                            <option value="13">Room2</option> 
+                        </td>
+                </tr>
+                <tr>
+                    <td><img src="./ic_iso_black_48dp.png" alt=""></td>
+                    <td>ISO</td><td>
+                        <select name="ISO" onchange="set_ISO(this.options[this.options.selectedIndex].value)"> 
+                            <option value="0">AUTO</option> 
+                            <option value="1">IRIS</option>
+                            <option value="2">Shutter</option> 
+                </tr>
+        </div>
+
+
+    </div>
+    <script src="./node_modules/nipplejs/dist/nipplejs.min.js"></script>
+    <script src="./MMC_Gimbal_Z40.js"></script>
+</body>
+
+</html>

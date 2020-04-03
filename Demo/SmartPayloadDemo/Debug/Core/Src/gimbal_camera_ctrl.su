@@ -1,0 +1,8 @@
+gimbal_camera_ctrl.c:18:6:g_take_photo	24	static
+gimbal_camera_ctrl.c:31:6:g_record	16	static
+gimbal_camera_ctrl.c:43:6:g_pitch_control	16	static
+gimbal_camera_ctrl.c:55:6:g_yaw_control	16	static
+gimbal_camera_ctrl.c:69:6:g_gimbal_mode	16	static
+gimbal_camera_ctrl.c:79:6:g_set_gimbal_pitch	16	static
+gimbal_camera_ctrl.c:89:6:g_set_gimbal_yaw	16	static
+gimbal_camera_ctrl.c:103:6:g_control_zoom	16	static

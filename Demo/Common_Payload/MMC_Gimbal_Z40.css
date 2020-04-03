@@ -1,0 +1,122 @@
+body {
+    height: 290px;
+    width: 600;
+}
+
+hr {
+    height: 1px;
+    margin: 2px;
+}
+
+div {
+    font-size: 13px
+}
+
+.front {
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+}
+
+tr {
+    text-align: center;
+}
+
+span {
+    vertical-align: middle;
+}
+
+.navigation>table {
+    width: 100%;
+}
+
+.feedback {
+    color: royalblue;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.back {
+    background-size: cover;
+    background-image: url("./joystick.png");
+}
+
+img {
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+}
+
+div>input {
+    background-color: darkgray;
+}
+
+.isoset {
+    background-color: darkgray;
+}
+
+.cameraFunc:active {
+    background-color: lawngreen;
+}
+
+#backlight {
+    visibility: hidden;
+}
+
+#defog {
+    visibility: hidden;
+}
+
+#nightmode {
+    visibility: hidden;
+}
+
+#followMode {
+    background-color: lawngreen;
+}
+
+#moveMode {
+    background-color: lawngreen;
+}
+
+#movieMode {
+    background-color: lawngreen;
+}
+
+#AUTOMode {
+    background-color: lawngreen;
+}
+
+#ISOAuto {
+    background-color: lawngreen;
+}
+
+.payloadImage {
+    width: 100px;
+    height: 100px;
+}
+
+.box {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: gainsboro;
+}
+
+#navigation {
+    position: relative;
+    height: 100%;
+    width: 150px;
+    background-color: lightgray;
+}
+
+#gimbal {
+    position: relative;
+    height: 100%;
+    width: 260px;
+    background-color: ghostwhite;
+}
+
+#camera {
+    background-color: dimgray;
+}

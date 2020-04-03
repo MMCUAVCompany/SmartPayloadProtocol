@@ -1,0 +1,2 @@
+float32_float16_convert.c:4:10:g_convert_native_float_to_float16	48	static
+float32_float16_convert.c:46:7:g_convert_float16_to_native_float	32	static
