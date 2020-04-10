@@ -296,21 +296,31 @@ Graphical Interactive Interface WebPage can get the click point coordinates on t
 
 ![data_frame](../resources/important1.jpg)*The right and bottom of the screen are the positive direction of the coordinates.*  
 
+
+
 *Button Control Frame*
 
 Graphical Interactive Interface WebPage can get physical button status in GCS/MCS.
 
 |FRAME HEAD|FRAME TYPE|LENGTH|PAYLOAD DATA|CRC|
 |------------------|---------------|-------------------|-------|------|
-|0xA5|0xF8|13|uint8_t photo<br/>uint8_t record<br>uint8_t zoom<br/>uint8_t gimbal_mode<br/>uint8_t camera_mode<br/>uint8_t F1<br/>uint8_t F2<br/>uint8_t F3<br/>uint8_t F4<br/>uint8_t res1<br/>uint8_t res2|crc|
+|0xA5|0xF8|4|uint8_t button <br/> uint8_t status|crc|
 
-> **photo**:the status of photo button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.  
-> **record**:the status of record button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.  
-> **zoom**:`2` means zoom in, `0` means zoom out, `1`means zoom stop.    
-> **gimbal_mode**:`0` means LOCK mode, `1` means FOLLOW mode, `2`means RESET mode.    
-> **F1-F4**:the status of additional function button 1-4. `1` means the button is pressed, `0`means the button is released. 
-> **camera_mode**: the status of camera_mode button in GCS/MCS. `1` means the button is pressed, `0`means the button is released.   
-> **res1,res2**:reserved.  
+>**button**:physical button in GCS/MCS.   
+>**status**:status of physical button.  
+
+|button name|button|status:action|
+|---|---|---|
+|photo|1|1:take a photo|
+|record|2|1:start record<br/>0:stop record|
+|zoom|3|0:zoom out<br/>1:zoom stop<br/>2:zoom in|
+|gimbal mode|4|0:LOCK<br/>1:FOLLOW<br/>2:RESET|
+|camera mode|5|0:RECORD<br/>1:PHOTO|
+|Function 1|6|0:button release<br/>1:button press|
+|Function 2|7|0:button release<br/>1:button press|
+|Function 3|8|0:button release<br/>1:button press|
+|Function 4|9|0:button release<br/>1:button press|
+
 
 *Attitude Control Frame*
 
@@ -336,7 +346,7 @@ Graphical Interactive Interface WebPage can get GPS status From GCS/MCS.
 > **status**:the status of gps fix. `1` means 2D fixed, `2` means 3D fixed, `0`means no fixed.  
 > **altitude**: altitude of drone platform.(Unit:cm)  
 > **latidute**: the value of latidute * 10^7 .  
-> **longitude**: the value of longitude * 10^7.  
+> **longitude**: the value of longitude * 10^7 .  
 
 ### Data Transparent Transmission<a name="data_transparent_transmission"></a>
 Data Transparent Transmission allows user to send custom data streams 
