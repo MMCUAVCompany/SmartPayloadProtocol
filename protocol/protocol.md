@@ -315,7 +315,7 @@ Graphical Interactive Interface WebPage can get physical button status in GCS/MC
 |record|2|1:start record<br/>0:stop record|
 |zoom|3|0:zoom out<br/>1:zoom stop<br/>2:zoom in|
 |gimbal mode|4|0:LOCK<br/>1:FOLLOW<br/>2:RESET|
-|camera mode|5|0:RECORD<br/>1:PHOTO|
+|camera mode|5|0:RECORD<br/>2:PHOTO|
 |Function 1|6|0:button release<br/>1:button press|
 |Function 2|7|0:button release<br/>1:button press|
 |Function 3|8|0:button release<br/>1:button press|
