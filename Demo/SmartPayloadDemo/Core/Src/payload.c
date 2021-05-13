@@ -12,6 +12,8 @@
 #include "stdio.h"
 #include "gimbal_camera_ctrl.h"
 #include "float32_float16_convert.h"
+#include <string.h>
+#include <stdlib.h>
 
 #define  HARDWARE_VERSION       2
 #define  FUNCTION_VERSION       2
@@ -138,12 +140,9 @@ gps_info_t gps_info;
 identification_procedure_e identification_procedure = PROCEDURE_IDEL;
 queue_t can_msg_queue;
 CAN_TxHeaderTypeDef drone_can_msg_head;
-uint8_t can_busy_flag = RESET;
 parser_stat_t parser_stat = IDEL;
 uint8_t drone_data_buf[256];
 uint32_t photo = 0;
-
-static void send_can_msg_to_drone(void);
 
 void g_payload_init(void)
 {
@@ -185,7 +184,7 @@ void g_send_to_drone(void *addr, uint8_t len)
 		queue_push(&can_msg_queue, &msg_to_drone);
 		//add error handle
 	}
-	send_can_msg_to_drone();
+//	send_can_msg_to_drone();
 }
 
 static void request_identify(void)
@@ -325,9 +324,9 @@ void g_update_identification_procedure(uint8_t data)
 {
 	switch (data)
 	{
-//	case 0x00:
-//		send_payload_id_to_drone();
-//		break;
+	case 0x00:
+		send_UID();
+		break;
 
 	case 0x01:
 		identification_procedure = PROCEDURE_SEND_ID;
@@ -342,22 +341,25 @@ void g_update_identification_procedure(uint8_t data)
 	}
 }
 
-static void send_can_msg_to_drone(void)
+
+void send_can_msg_to_drone(void)
 {
 	uint32_t mail_box;
 	can_msg_t can_tx_msg;
-	if (can_busy_flag == RESET)
 	{
-		can_busy_flag = SET;
+		mail_box = HAL_CAN_GetTxMailboxesFreeLevel(&hcan1);
+		if(mail_box == 0){
+			//no free mailbox
+			return;
+		}
 
-		queue_pop(&can_msg_queue, &can_tx_msg);
-
-		drone_can_msg_head.DLC = can_tx_msg.len;
-		HAL_CAN_AddTxMessage(&hcan1, &drone_can_msg_head, can_tx_msg.data,
-				&mail_box);
+		if(queue_pop(&can_msg_queue, &can_tx_msg) == 0){
+			drone_can_msg_head.DLC = can_tx_msg.len;
+			HAL_CAN_AddTxMessage(&hcan1, &drone_can_msg_head, can_tx_msg.data,
+							&mail_box);
+		}
 	}
 }
-
 void g_handle_drone_instruction(uint8_t *data)
 {
 	float value;
@@ -547,39 +549,10 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 	CAN_RxHeaderTypeDef Header;
 	can_msg_t can_rx_msg;
 	HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &Header, can_rx_msg.data);
-	can_rx_msg.len = Header.DLC;
-	can_rx_msg.StdID = Header.StdId;
-	g_parser_drone_packet(&can_rx_msg);
-}
-
-void can_send_complete(CAN_HandleTypeDef *hcan)
-{
-	uint32_t mail_box;
-	can_msg_t can_tx_msg;
-	if (queue_pop(&can_msg_queue, &can_tx_msg) == 0)
-	{
-
-		drone_can_msg_head.DLC = can_tx_msg.len;
-		HAL_CAN_AddTxMessage(&hcan1, &drone_can_msg_head, can_tx_msg.data,
-				&mail_box);
-	}
-	else
-	{
-		can_busy_flag = RESET;
+	if(Header.StdId == (DEVICE_ID & 0XFF)){
+		can_rx_msg.len = Header.DLC;
+		can_rx_msg.StdID = Header.StdId;
+		g_parser_drone_packet(&can_rx_msg);
 	}
 }
 
-void HAL_CAN_TxMailbox0CompleteCallback(CAN_HandleTypeDef *hcan)
-{
-	can_send_complete(hcan);
-}
-
-void HAL_CAN_TxMailbox1CompleteCallback(CAN_HandleTypeDef *hcan)
-{
-	can_send_complete(hcan);
-}
-
-void HAL_CAN_TxMailbox2CompleteCallback(CAN_HandleTypeDef *hcan)
-{
-	can_send_complete(hcan);
-}

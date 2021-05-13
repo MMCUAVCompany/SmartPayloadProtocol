@@ -58,7 +58,7 @@ uint8_t queue_pop(queue_t *queue, queue_item_t *queue_item)
 uint8_t queue_push(queue_t *queue, queue_item_t *queue_item)
 {
 	queue_node_t *node = NULL;
-	if (queue_item == NULL || heap == NULL)
+	if (queue_item == NULL || heap == NULL || queue == NULL)
 	{
 		return -1;
 	}

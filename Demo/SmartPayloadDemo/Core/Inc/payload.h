@@ -12,5 +12,5 @@
 
 void g_payload_init(void);
 void g_identification(void);
-
+void send_can_msg_to_drone(void);
 #endif /* INC_PAYLOAD_H_ */

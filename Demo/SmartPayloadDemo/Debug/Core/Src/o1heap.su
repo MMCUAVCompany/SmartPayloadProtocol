@@ -6,7 +6,7 @@ o1heap.c:157:21:invoke	16	static
 o1heap.c:167:21:interlink	16	static
 o1heap.c:181:21:rebin	24	static
 o1heap.c:203:21:unbin	24	static
-o1heap.c:234:17:o1heapInit	48	static
+o1heap.c:234:17:o1heapInit	40	static
 o1heap.c:291:7:o1heapAllocate	64	static
 o1heap.c:385:6:o1heapFree	32	static
 o1heap.c:457:6:o1heapDoInvariantsHold	64	static
